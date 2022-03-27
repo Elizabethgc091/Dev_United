@@ -4,10 +4,15 @@ import React from "react";
 /** Firebase Service */
 import { db } from "./firebaseService/firebase";
 
-/** Style */
+/** components */
+import Home from "./components/home/Home";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Home />
+    </div>
+  );
 }
 
 export default App;
