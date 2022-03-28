@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+}
+.feed-page {
+  background-color: aquamarine;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.container-feed {
+  background-color: aliceblue;
+  width: 600px;
+}
+.header-feed {
+  background-color: bisque;
+  display: flex;
+  justify-content: space-between;
+}
+.space-to-tweet {
+  background-color: rgb(114, 82, 41);
+  display: flex;
+  border-bottom: 5px solid black;
+}
+.input-tweet {
+  display: flex;
+  flex-direction: column;
+}
+.info-letters {
+  background-color: cadetblue;
+  display: flex;
+  justify-content: space-between;
+}
+.btn-post {
+  background-color: aqua;
+  display: flex;
+  justify-content: flex-end;
+}

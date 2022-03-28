@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+.color-palete {
+  display: flex;
+  flex-direction: column;
+}
+#color-favorite {
+  font-family: "Fira Code";
+  font-size: 22px;
+  color: #fff;
+}
+.colors {
+  display: flex;
+}
+.color-margin {
+  height: 58px;
+  width: 58px;
+  margin: 8px;
+  cursor: pointer;
+}
+
+.color-margin:hover {
+  border: 5px solid rgb(255, 255, 255);
+}
+.color-red {
+  background-color: #f50d5a;
+}
+.color-orange {
+  background-color: #ff865c;
+}
+.color-yellow {
+  background-color: #ffea5c;
+}
+.color-green {
+  background-color: #00da76;
+}
+.color-blue {
+  background-color: #0096ce;
+}
+.color-purple {
+  background-color: #800fff;
+}
+#select-color {
+  font-family: "Fira Code";
+  font-size: 18px;
+}
+/* Media Query for mobile*/
+@media only screen and (max-width: 768px) {
+  #color-favorite {
+    font-size: 18px;
+  }
+  .color-margin {
+    height: 43px;
+    width: 43px;
+    margin: 4px;
+  }
+}

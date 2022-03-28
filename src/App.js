@@ -7,15 +7,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 /** components */
 import Home from "./components/pages/home/Home";
 import RegisterPage from "./components/pages/register/RegisterPage";
+import Feed from "./components/pages/feed/Feed";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
-        </Routes>
+          <Route path="/feed" element={<Feed />}></Route>
+        </Routes> */}
+        <Home />
       </div>
     </BrowserRouter>
   );
