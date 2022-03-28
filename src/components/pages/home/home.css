@@ -1,23 +1,115 @@
 * {
   box-sizing: border-box;
 }
+@font-face {
+  font-family: slkscr font;
+  src: url("../../../sources/fonts/silkscreen/slkscr.ttf");
+}
 .home-page {
-  background-color: aqua;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Fira Code", monospace;
+  background-color: #2e132c;
+  color: #fff;
 }
 .box-1,
 .box-2 {
-  background-color: aquamarine;
   flex: 1;
   display: flex;
   justify-content: center;
+  padding: 50px;
 }
+
 .container-logo {
-  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+}
+#logo-dev-united {
+  height: 250px;
+  margin-bottom: 32px;
+}
+#text-logo {
+  height: 55px;
 }
 .container-login {
-  background-color: blueviolet;
+  margin-top: 230px;
+}
+
+.container-welcome {
+  font-family: slkscr font;
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: 48px;
+}
+.description-text {
+  font-size: 24px;
+  margin-bottom: 48px;
+}
+.btn-signIn {
+  display: flex;
+  background-color: #4285f4;
+  border-radius: 5px;
+  height: 58px;
+}
+#icon-google {
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 5px 0 0 5px;
+}
+#btn-login {
+  flex: 2;
+  background-color: #4285f4;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 24px;
+}
+.footer {
+  display: flex;
+  justify-content: center;
+  font-family: Fira Code;
+  font-size: 18px;
+  color: #60265b;
+  margin: 90px;
+}
+#beta {
+  color: rgb(239, 0, 72);
+}
+/* Media Query for mobile*/
+@media only screen and (min-width: 280px) and (max-width: 1024px) {
+  .home-page {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #logo-dev-united {
+    height: 120px;
+    margin-bottom: 20px;
+  }
+  #text-logo {
+    height: 30px;
+  }
+  .container-login {
+    margin-top: 0px;
+  }
+
+  .container-welcome {
+    font-size: 34px;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+  .description-text {
+    font-size: 18px;
+    margin-bottom: 28px;
+  }
+
+  #btn-login {
+    font-size: 18px;
+  }
+  .footer {
+    font-size: 14px;
+    margin: 30px;
+  }
 }
