@@ -59,7 +59,7 @@ export default function Home() {
               </div>
               <footer className="footer">
                 <p>
-                  © 2022 Devs_United <span id="beta">-BETA</span>{" "}
+                  © 2022 Devs_United<span id="beta">-BETA</span>{" "}
                 </p>
               </footer>
             </div>

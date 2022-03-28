@@ -1,17 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: slkscr font;
+  src: url("../../../sources/fonts/silkscreen/slkscr.ttf");
+}
 .register-page {
-  background-color: brown;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #2e132c;
 }
 
 .container-register,
 .container-logo-register {
-  background-color: bisque;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+}
+.register {
+  margin-top: 120px;
+}
+#logoRegister {
+  height: 200px;
+  margin-bottom: 30px;
+}
+#textRegister {
+  height: 48px;
+}
+.user-name {
+  font-family: slkscr font;
+  color: #fff;
+  font-size: 48px;
+}
+
+.user-name-color {
+  color: #fff;
+}
+.user-name-color.red {
+  color: #f50d5a;
+}
+.user-name-color.orange {
+  color: #ff865c;
+}
+
+.user-name-color.yellow {
+  color: #ffea5c;
+}
+
+.user-name-color.green {
+  color: #00da76;
+}
+
+.user-name-color.blue {
+  color: #0096ce;
+}
+.user-name-color.purple {
+  color: #800fff;
+}
+
+.input-userName {
+  background-color: #150714;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  color: #914d8b;
+  font-family: "Fira Code";
+  font-size: 24px;
+  border: none;
+}
+.input-userName::placeholder {
+  font-family: "Fira Code";
+  color: #914d8b;
+  font-size: 24px;
+}
+#btn-continue {
+  background-color: #00da76;
+  width: 100%;
+  padding: 18px;
+  font-family: slkscr font;
+  color: #fff;
+  font-size: 24px;
+  margin-top: 30px;
+}
+/* Media Query for mobile*/
+@media only screen and (min-width: 280px) and (max-width: 1024px) {
+  .register-page {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .container-logo-register {
+    margin-top: 90px;
+  }
+  #logoRegister {
+    height: 100px;
+    margin-bottom: 15px;
+  }
+  #textRegister {
+    height: 28px;
+  }
+  .user-name {
+    font-size: 30px;
+  }
+  .input-userName {
+    padding: 12px;
+    width: 100%;
+    font-size: 18px;
+    border: none;
+  }
+  .input-userName::placeholder {
+    font-size: 18px;
+  }
+  #btn-continue {
+    padding: 15px;
+
+    font-size: 20px;
+    margin-top: 20px;
+  }
 }

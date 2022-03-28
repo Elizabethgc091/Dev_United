@@ -11,10 +11,16 @@ import ColorPalete from "./ColorPalete";
 /**Style */
 import "./registerPage.css";
 
+/** sources */
+import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
+import textLogo from "../../../sources/icons/textLogo.svg";
+
 export default function RegisterPage() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [color, setColor] = useState("");
+  const estiloBase = "user-name-color";
+  let estiloDinamico = color ? color : "";
 
   useEffect(() => {
     if (auth.currentUser === null) {
@@ -43,19 +49,24 @@ export default function RegisterPage() {
     <>
       <div className="register-page">
         <div className="container-logo-register">
-          <div>logo</div>
-          <div>text</div>
+          <img id="logoRegister" src={logoDevUnited} alt="" />
+          <img id="textRegister" src={textLogo} alt="" />
         </div>
         <div className="container-register">
           <div className="register">
-            <div className="welcome-username">
-              <span>Welcome</span>
-              <span>{userName}</span>
+            <div className="user-name">
+              <p id="welcome">
+                welcome <br />
+                <span
+                  className={estiloBase + " " + estiloDinamico}
+                >{`${userName}!`}</span>
+              </p>
             </div>
             <input
+              className="input-userName"
               type="text"
               value={userName}
-              placeholder="username"
+              placeholder=" Type your username"
               onChange={(e) => setUserName(e.target.value)}
             ></input>
             <div>
@@ -63,6 +74,7 @@ export default function RegisterPage() {
             </div>
             <div>
               <button
+                id="btn-continue"
                 type="button"
                 onClick={sendRegister}
                 disabled={userName === "" || color === ""}
@@ -71,7 +83,11 @@ export default function RegisterPage() {
               </button>
             </div>
           </div>
-          <footer>Lorem, ipsum dolor.</footer>
+          <footer className="footer">
+            <p>
+              © 2022 Devs_United<span id="beta">-BETA</span>{" "}
+            </p>
+          </footer>
         </div>
       </div>
     </>
