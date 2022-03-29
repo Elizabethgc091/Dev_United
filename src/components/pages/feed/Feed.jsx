@@ -3,26 +3,43 @@ import React, { useState, useEffect } from "react";
 /** components */
 import TweetCard from "./TweetCard";
 
-/** Sources */
+/** Firebase */
+import { auth } from "../../../firebaseService/firebase";
+
+/** funcionalities */
 import { addTweet } from "../../../functionalities/funcionalities";
 import { fetchLatestTweet } from "../../../functionalities/funcionalities";
 
 /** Style */
 import "./feed.css";
+
+/** Sources */
+import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
+import textLogo from "../../../sources/icons/textLogo.svg";
+
 export default function Feed() {
   const [message, setMessage] = useState("");
   const [timeLine, setTimeLine] = useState([]);
+  const [authUser, setAuthUser] = useState({});
+  const CHAR_LIMIT = 200;
 
   useEffect(() => {
     fetchLatestTweet(setTimeLine);
   }, []);
+
+  auth.onAuthStateChanged((user) => {
+    setAuthUser(user);
+  });
 
   /**
    * @description función que guarda un tweet
    */
   function handleChange(event) {
     const { value } = event.target;
-    setMessage(value);
+    console.log(value.length);
+    if (value.length <= CHAR_LIMIT) {
+      setMessage(value);
+    }
   }
   /**
    * @description función que agrega tweets a firestore
@@ -32,30 +49,36 @@ export default function Feed() {
     addTweet({
       content: message,
     });
+    setMessage("");
   }
+
+  /** contador de letras */
 
   return (
     <>
       <div className="feed-page">
         <div className="container-feed">
           <header className="header-feed">
-            <div>fto perfil</div>
-            <div>logo</div>
-            <div>text de logo</div>
+            <img id="photoURL" src={authUser.photoURL} alt="" />
+            <img id="logoFeed" src={logoDevUnited}></img>
+            <img id="text-logo-feed" src={textLogo} alt="" />
           </header>
           <section className="space-to-tweet">
-            <div>foto perfil</div>
+            <img id="photoURLtweet" src={authUser.photoURL} alt="" />
             <div className="input-tweet">
               <textarea
+                id="textArea-tweet"
                 value={message}
                 placeholder="What`s happening?"
-                cols="30"
-                rows="10"
                 onChange={handleChange}
               ></textarea>
-              <div className="info-letters">
-                <span># cracter</span>
-                <span> 200mx</span>
+              <div className="count-characters">
+                <p id="message-count">{message.length}</p>
+                <p id="message-limit">{`${CHAR_LIMIT} max.`}</p>
+                {/* <div
+                  className="progress-bar"
+                  style={{ width: `${calculatePercentage()}%` }}
+                ></div> */}
               </div>
               <div className="btn-post">
                 <button
@@ -68,6 +91,7 @@ export default function Feed() {
               </div>
             </div>
           </section>
+
           <section>
             {timeLine.map((tweet) => {
               return <TweetCard tweet={tweet} />;

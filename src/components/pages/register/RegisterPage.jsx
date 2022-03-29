@@ -38,6 +38,7 @@ export default function RegisterPage() {
       .set({
         color: selectedColor,
         userName: userName,
+        photoURL: auth.currentUser.photoURL,
       })
       .then(
         //Si fue exito manda a la siguiente pagina

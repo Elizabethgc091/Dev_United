@@ -1,28 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 /** Style*/
 import "./tweetCard.css";
-import { auth } from "../../../firebaseService/firebase";
 
 export default function TweetCard({ tweet }) {
   const temporalUser = {
     photoURL:
       "https://icon-library.com/images/unknown-person-icon/unknown-person-icon-4.jpg",
     userName: "Cargando...",
+    color: "#FFFFFF",
+  };
+  const [user, setUser] = useState(temporalUser);
+  const estiloBase = "user-color";
+  let estiloDinamico = user.color ? user.color : "red";
+
+  var options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   };
 
-  const [user, setUser] = useState(temporalUser);
-  tweet.user.get().then((tweetUser) => {
-    setUser(tweetUser.data());
+  useEffect(() => {
+    tweet.user.get().then((tweetUser) => {
+      setUser(tweetUser.data());
+    });
   });
+
   return (
     <>
       <div className="container-tweet-card">
         <div className="foto-perfil">
-          <img src={user.photoURL} alt="" />
+          <img id="photo-tweet" src={user.photoURL} alt="" />
         </div>
         <div className="contenido-del-tweet">
-          <div>@{user.userName} -fecha</div>
+          <div>
+            <div className={estiloBase + "-" + estiloDinamico}>
+              {user.userName}
+            </div>
+            -{tweet.created_at.toDate().toLocaleDateString("es-MX", options)}
+          </div>
           <div>icono borrar</div>
           <div className="contenido-mensaje">
             <section>{tweet.content}</section>
@@ -34,7 +50,7 @@ export default function TweetCard({ tweet }) {
             </p> */}
             <div className="like">
               <p>❤️</p>
-              <p>100</p>
+              <p>{tweet.likesCount}</p>
             </div>
           </div>
         </div>

@@ -2,33 +2,79 @@
   box-sizing: border-box;
 }
 .feed-page {
-  background-color: aquamarine;
+  background-color: #2e132c;
   height: 100vh;
   display: flex;
   justify-content: center;
 }
 .container-feed {
-  background-color: aliceblue;
+  background-color: #2e132c;
   width: 600px;
 }
 .header-feed {
   background-color: bisque;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 8px;
 }
+#photoURL,
+#photoURLtweet {
+  border-radius: 30px;
+  border: 2px solid yellow;
+}
+#logoFeed,
+#photoURL {
+  height: 30px;
+}
+#logoFeed {
+  margin-left: 85px;
+}
+#text-logo-feed {
+  height: 14px;
+}
+
 .space-to-tweet {
   background-color: rgb(114, 82, 41);
   display: flex;
   border-bottom: 5px solid black;
 }
+#photoURLtweet {
+  height: 56px;
+}
 .input-tweet {
   display: flex;
   flex-direction: column;
+  margin-left: 16px;
 }
-.info-letters {
+#textArea-tweet {
+  width: 500px;
+  height: 113px;
+  background-color: #2f112d;
+  resize: none;
+  color: #914d8b;
+  font-family: "Fira Code";
+  font-size: 20px;
+}
+textarea::placeholder {
+  color: #914d8b;
+}
+.count-characters {
   background-color: cadetblue;
   display: flex;
   justify-content: space-between;
+}
+#message-count,
+#message-limit {
+  font-size: 16px;
+  font-family: "Fira Code";
+}
+#message-count {
+  color: #fff;
+}
+#message-limit {
+  color: #f50d5a;
 }
 .btn-post {
   background-color: aqua;
