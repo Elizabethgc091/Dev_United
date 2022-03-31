@@ -52,53 +52,68 @@ export default function Feed() {
     setMessage("");
   }
 
-  /** contador de letras */
+  /** 
+   * @description funcion que calcula el porcentaje del tamaño del tweet
+  */
+  const calculatePercentage = () => (message.length / CHAR_LIMIT) * 100;
+
+  function userPerfil() {
+    console.log("Redirige al perfil del usuario")
+
+  }
 
   return (
     <>
-      <div className="feed-page">
-        <div className="container-feed">
-          <header className="header-feed">
-            <img id="photoURL" src={authUser.photoURL} alt="" />
-            <img id="logoFeed" src={logoDevUnited}></img>
-            <img id="text-logo-feed" src={textLogo} alt="" />
-          </header>
-          <section className="space-to-tweet">
-            <img id="photoURLtweet" src={authUser.photoURL} alt="" />
-            <div className="input-tweet">
-              <textarea
-                id="textArea-tweet"
-                value={message}
-                placeholder="What`s happening?"
-                onChange={handleChange}
-              ></textarea>
-              <div className="count-characters">
-                <p id="message-count">{message.length}</p>
-                <p id="message-limit">{`${CHAR_LIMIT} max.`}</p>
-                {/* <div
-                  className="progress-bar"
-                  style={{ width: `${calculatePercentage()}%` }}
-                ></div> */}
-              </div>
-              <div className="btn-post">
-                <button
-                  type="button"
-                  className="btn-post"
-                  onClick={handleSubmit}
-                >
-                  post
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <section>
-            {timeLine.map((tweet) => {
-              return <TweetCard tweet={tweet} />;
-            })}
-          </section>
+      <div className="header-container">
+        <div className="nav-container">
+          <img id="photoURL" src={authUser.photoURL} alt="foto-perfil" onClick={userPerfil} />
+          <img id="logo-feed" src={logoDevUnited}></img>
+          <img id="text-logo-feed" src={textLogo} alt="" />
         </div>
       </div>
+      <div className="form-container">
+        <div className="tweet-container">
+          <img id="photoURLtweet" src={authUser.photoURL} alt="foto-perfil" />
+          <div>
+            <textarea
+              id="text-area-tweet"
+              value={message}
+              placeholder="What`s happening?"
+              onChange={handleChange}
+            ></textarea>
+            <div className="progress-wrapper">
+              <div
+                className="progress-bar"
+                style={{ width: `${calculatePercentage()}%` }}
+              ></div>
+            </div>
+            <div className="count-characters">
+              <p id="message-count">{message.length}</p>
+              <p id="message-limit">{`${CHAR_LIMIT} max.`}</p>
+            </div>
+            <div className="container-btn-post">
+              <button
+                id="btn-post"
+                type="submit"
+                className="btn-post"
+                onClick={handleSubmit}
+                disabled={message.length > 0 ? false : true}
+              >
+                POST
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <section className="tweets-content">
+        <div className="tweets-box">
+          {timeLine.map((tweet) => {
+            return <TweetCard tweet={tweet} key={tweet.id} />;
+          })}
+        </div>
+
+      </section>
     </>
   );
 }

@@ -1,35 +1,44 @@
 * {
   box-sizing: border-box;
+  padding: 0;
 }
 @font-face {
   font-family: slkscr font;
   src: url("../../../sources/fonts/silkscreen/slkscr.ttf");
 }
-.container-tweet-card {
+.section-tweet-container {
   display: flex;
-  border-bottom: 3px solid blue;
+  border-bottom: 2px solid #60265b;
+  margin-bottom: 18px;
 }
-.foto-perfil {
-  width: 56px;
+.photo-perfil-tweets {
   height: 56px;
-  flex: 1;
-}
-.foto-perfil img {
   width: 56px;
+  margin-right: 18px;
+}
+#photo-tweet {
   height: 56px;
   border-radius: 50%;
 }
-.contenido-del-tweet {
-  flex: 5;
+.tweets-box {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-family: slkscr font;
 }
-.contenido-mensaje {
-  font-family: "Fira Code";
+.info-tweets {
+  display: flex;
+  justify-content: space-between;
+}
+.userName-fecha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#userName {
+  font-family: slkscr font;
+  font-size: 20px;
+  margin-right: 4px;
+}
+#date {
   font-size: 18px;
-  color: #fff;
 }
 .user-color-red {
   background-color: #f50d5a;
@@ -49,10 +58,29 @@
 .user-color-purple {
   background-color: #800fff;
 }
-
-.like {
-  display: flex;
+#garbage-svg {
+  height: 30px;
+  padding: 8px;
 }
-.like p {
-  margin: 6px;
+.message-content {
+  word-wrap: break-word;
+  padding: 8px;
+  color: #fff;
+  font-size: 18px;
+}
+#tweet-msg::first-letter {
+  text-transform: uppercase;
+}
+.like-container {
+  display: flex;
+
+  align-items: center;
+}
+#like-svg {
+  height: 20px;
+}
+#contador-like {
+  color: #f50d5a;
+  font-size: 16px;
+  margin-left: 4px;
 }

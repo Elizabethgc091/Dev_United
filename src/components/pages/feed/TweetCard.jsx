@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 
 /** Style*/
 import "./tweetCard.css";
+/** Source */
+import heartLike from "../../../sources/icons/heartLike.svg";
+import garbage from "../../../sources/icons/garbage.svg";
 
 export default function TweetCard({ tweet }) {
   const temporalUser = {
@@ -16,7 +19,7 @@ export default function TweetCard({ tweet }) {
 
   var options = {
     year: "numeric",
-    month: "short",
+    month: "numeric",
     day: "numeric",
   };
 
@@ -25,35 +28,41 @@ export default function TweetCard({ tweet }) {
       setUser(tweetUser.data());
     });
   });
+  /**
+   *@description Funcion que actualiza likes en base de datos
+   */
+  function likeTweet() {
+    console.log("Diste un like");
+  }
 
   return (
     <>
-      <div className="container-tweet-card">
-        <div className="foto-perfil">
-          <img id="photo-tweet" src={user.photoURL} alt="" />
+      <div className="section-tweet-container">
+        <div className="photo-perfil-tweets">
+          <img id="photo-tweet" src={user.photoURL} alt="profile-photo" />
         </div>
-        <div className="contenido-del-tweet">
-          <div>
-            <div className={estiloBase + "-" + estiloDinamico}>
-              {user.userName}
+        <div className="tweets-box">
+          <div className="info-tweets">
+            <div className="userName-fecha">
+              <div id="userName" className={estiloBase + "-" + estiloDinamico}>
+                {user.userName}
+              </div>
+              <div>
+                <span id="date"> -{tweet.created_at.toDate().toLocaleDateString("es-MX", options)}</span>
+              </div>
+
             </div>
-            -{tweet.created_at.toDate().toLocaleDateString("es-MX", options)}
+            <img id="garbage-svg" src={garbage} alt="basura" />
           </div>
-          <div>icono borrar</div>
-          <div className="contenido-mensaje">
-            <section>{tweet.content}</section>
-            {/* <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-              consectetur repellat vitae eveniet sunt expedita. Delectus optio
-              ipsam nam nihil vel impedit, deserunt amet ducimus cupiditate modi
-              id. Consequuntur, eius?
-            </p> */}
-            <div className="like">
-              <p>❤️</p>
-              <p>{tweet.likesCount}</p>
-            </div>
+          <div className="message-content">
+            <p id="tweet-msg">{tweet.content}</p>
+          </div>
+          <div className="like-container">
+            <img id="like-svg" src={heartLike} alt="like" />
+            <p id="contador-like">100</p>
           </div>
         </div>
+
       </div>
     </>
   );
