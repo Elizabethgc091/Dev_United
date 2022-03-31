@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { auth } from "../../../firebaseService/firebase"
+
 /** Style*/
 import "./tweetCard.css";
 /** Source */
@@ -25,7 +27,11 @@ export default function TweetCard({ tweet }) {
 
   useEffect(() => {
     tweet.user.get().then((tweetUser) => {
-      setUser(tweetUser.data());
+
+      setUser({
+        id: tweetUser.id,
+        ...tweetUser.data()
+      });
     });
   });
   /**
@@ -34,7 +40,10 @@ export default function TweetCard({ tweet }) {
   function likeTweet() {
     console.log("Diste un like");
   }
+  function deleteTweet() {
+    console.log("borrar tweets")
 
+  }
   return (
     <>
       <div className="section-tweet-container">
@@ -52,7 +61,8 @@ export default function TweetCard({ tweet }) {
               </div>
 
             </div>
-            <img id="garbage-svg" src={garbage} alt="basura" />
+            {auth.currentUser.uid == user.id ? <img id="garbage-svg" src={garbage} alt="basura" onClick={deleteTweet} /> : ""}
+
           </div>
           <div className="message-content">
             <p id="tweet-msg">{tweet.content}</p>
