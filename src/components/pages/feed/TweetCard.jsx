@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import { auth } from "../../../firebaseService/firebase"
 
+
 /** Style*/
 import "./tweetCard.css";
 /** Source */
 import heartLike from "../../../sources/icons/heartLike.svg";
 import garbage from "../../../sources/icons/garbage.svg";
 
-export default function TweetCard({ tweet }) {
+export default function TweetCard({ tweet, onDeleteTweet }) {
   const temporalUser = {
     photoURL:
       "https://icon-library.com/images/unknown-person-icon/unknown-person-icon-4.jpg",
@@ -27,7 +28,6 @@ export default function TweetCard({ tweet }) {
 
   useEffect(() => {
     tweet.user.get().then((tweetUser) => {
-
       setUser({
         id: tweetUser.id,
         ...tweetUser.data()
@@ -40,10 +40,9 @@ export default function TweetCard({ tweet }) {
   function likeTweet() {
     console.log("Diste un like");
   }
-  function deleteTweet() {
-    console.log("borrar tweets")
 
-  }
+
+
   return (
     <>
       <div className="section-tweet-container">
@@ -61,7 +60,7 @@ export default function TweetCard({ tweet }) {
               </div>
 
             </div>
-            {auth.currentUser.uid == user.id ? <img id="garbage-svg" src={garbage} alt="basura" onClick={deleteTweet} /> : ""}
+            {auth.currentUser.uid == user.id ? <img id="garbage-svg" src={garbage} alt="basura" onClick={onDeleteTweet} /> : ""}
 
           </div>
           <div className="message-content">
@@ -69,7 +68,7 @@ export default function TweetCard({ tweet }) {
           </div>
           <div className="like-container">
             <img id="like-svg" src={heartLike} alt="like" />
-            <p id="contador-like">100</p>
+            <p id="contador-like">{tweet.likesCount}</p>
           </div>
         </div>
 

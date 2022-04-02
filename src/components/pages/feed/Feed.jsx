@@ -4,11 +4,10 @@ import React, { useState, useEffect } from "react";
 import TweetCard from "./TweetCard";
 
 /** Firebase */
-import { auth } from "../../../firebaseService/firebase";
+import { auth, db } from "../../../firebaseService/firebase";
 
 /** funcionalities */
-import { addTweet } from "../../../functionalities/funcionalities";
-import { fetchLatestTweet } from "../../../functionalities/funcionalities";
+import { addTweet, deleteTweet } from "../../../functionalities/funcionalities";
 
 /** Style */
 import "./feed.css";
@@ -24,12 +23,30 @@ export default function Feed() {
   const CHAR_LIMIT = 200;
 
   useEffect(() => {
-    fetchLatestTweet(setTimeLine);
+    const desuscribir = db.collection("tweets")
+      .orderBy("created_at", "desc")
+      .onSnapshot((querySnapshot) => {
+        const tweets = [];
+        querySnapshot.forEach((doc) => {
+          const id = doc.id;
+          const temp = {
+            id,
+            ...doc.data(),
+          };
+          tweets.push(temp);
+        });
+        setTimeLine(tweets);
+      });
+
+    auth.onAuthStateChanged((user) => {
+      setAuthUser(user);
+    });
+    return () => {
+      desuscribir();
+    }
   }, []);
 
-  auth.onAuthStateChanged((user) => {
-    setAuthUser(user);
-  });
+
 
   /**
    * @description función que guarda un tweet
@@ -109,7 +126,7 @@ export default function Feed() {
       <section className="tweets-content">
         <div className="tweets-box">
           {timeLine.map((tweet) => {
-            return <TweetCard tweet={tweet} key={tweet.id} />;
+            return <TweetCard tweet={tweet} key={tweet.id} onDeleteTweet={() => deleteTweet(tweet.id)} />;
           })}
         </div>
 
