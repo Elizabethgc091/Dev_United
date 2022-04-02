@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { auth } from "../../../firebaseService/firebase"
+import { auth, db } from "../../../firebaseService/firebase"
 
 
 /** Style*/
@@ -9,7 +9,7 @@ import "./tweetCard.css";
 import heartLike from "../../../sources/icons/heartLike.svg";
 import garbage from "../../../sources/icons/garbage.svg";
 
-export default function TweetCard({ tweet, onDeleteTweet }) {
+export default function TweetCard({ tweet, onDeleteTweet, onLikeTweet }) {
   const temporalUser = {
     photoURL:
       "https://icon-library.com/images/unknown-person-icon/unknown-person-icon-4.jpg",
@@ -37,10 +37,6 @@ export default function TweetCard({ tweet, onDeleteTweet }) {
   /**
    *@description Funcion que actualiza likes en base de datos
    */
-  function likeTweet() {
-    console.log("Diste un like");
-  }
-
 
 
   return (
@@ -67,7 +63,7 @@ export default function TweetCard({ tweet, onDeleteTweet }) {
             <p id="tweet-msg">{tweet.content}</p>
           </div>
           <div className="like-container">
-            <img id="like-svg" src={heartLike} alt="like" />
+            <img id="like-svg" src={heartLike} alt="like" onClick={onLikeTweet} />
             <p id="contador-like">{tweet.likesCount}</p>
           </div>
         </div>

@@ -20,6 +20,7 @@ export default function Feed() {
   const [message, setMessage] = useState("");
   const [timeLine, setTimeLine] = useState([]);
   const [authUser, setAuthUser] = useState({});
+  const [userData, setUserData] = useState({})
   const CHAR_LIMIT = 200;
 
   useEffect(() => {
@@ -40,13 +41,16 @@ export default function Feed() {
 
     auth.onAuthStateChanged((user) => {
       setAuthUser(user);
+
+      db.collection("users").doc(user.uid).get().then((response) => {
+        setUserData(response.data())
+      })
     });
     return () => {
       desuscribir();
     }
   }, []);
-
-
+  console.log("usuario autentivado");
 
   /**
    * @description función que guarda un tweet
@@ -76,6 +80,22 @@ export default function Feed() {
 
   function userPerfil() {
     console.log("Redirige al perfil del usuario")
+
+  }
+
+  function likeTweet(id, likesCount) {
+    console.log(userData.favorites);
+    // si ya le dio like, se hace una operacion de dislike (tweet -  1,  usuario elimina de lista de favs)
+    if (userData.favorites.includes(id)) {
+
+      console.log("diste dislike")
+      db.collection("tweets").doc(id).update({ likesCount: likesCount - 1 })
+      db.collection("users").doc(auth.currentUser.uid).update({ favorites: [] })
+    } else {
+      console.log("Diste un like");
+      db.collection("tweets").doc(id).update({ likesCount: likesCount + 1 })
+      db.collection("users").doc(auth.currentUser.uid).update({ favorites: [id] })
+    }
 
   }
 
@@ -126,7 +146,7 @@ export default function Feed() {
       <section className="tweets-content">
         <div className="tweets-box">
           {timeLine.map((tweet) => {
-            return <TweetCard tweet={tweet} key={tweet.id} onDeleteTweet={() => deleteTweet(tweet.id)} />;
+            return <TweetCard tweet={tweet} key={tweet.id} onDeleteTweet={() => deleteTweet(tweet.id)} onLikeTweet={() => likeTweet(tweet.id, tweet.likesCount)} />;
           })}
         </div>
 
