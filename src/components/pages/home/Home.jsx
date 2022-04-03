@@ -1,19 +1,14 @@
 /** Dependencies */
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../user/UserProvider";
 
 /** Style */
 import "./home.css";
 
-/** Firebase Services */
-import {
-  auth,
-  loginWithGoogle,
-  logout,
-} from "../../../firebaseService/firebase";
 
-/** Router */
-import { Navigate } from "react-router-dom";
+import { loginWithGoogle, logout } from "../../../firebaseService/firebase"
+
 
 /** Sources */
 import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
@@ -22,11 +17,9 @@ import iconoGoogle from "../../../sources/icons/iconoGoogle.svg";
 
 export default function Home() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const { user } = React.useContext(UserContext)
 
-  auth.onAuthStateChanged((user) => {
-    setUser(user);
-  });
+
 
   return (
     <>

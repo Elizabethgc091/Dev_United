@@ -8,18 +8,21 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/pages/home/Home";
 import RegisterPage from "./components/pages/register/RegisterPage";
 import Feed from "./components/pages/feed/Feed";
+import UserProvider from "./user/UserProvider";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/register" element={<RegisterPage />}></Route>
-          <Route path="/feed" element={<Feed />}></Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/register" element={<RegisterPage />}></Route>
+            <Route path="/feed" element={<Feed />}></Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </UserProvider>
   );
 }
 
