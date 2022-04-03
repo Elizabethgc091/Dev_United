@@ -1,6 +1,7 @@
 /** Dependencies */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../user/UserProvider";
 
 /** Firebase */
 import { auth, db } from "../../../firebaseService/firebase";
@@ -16,17 +17,14 @@ import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
 import textLogo from "../../../sources/icons/textLogo.svg";
 
 export default function RegisterPage() {
+  const { user } = React.useContext(UserContext)
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [color, setColor] = useState("");
   const estiloBase = "user-name-color";
   let estiloDinamico = color ? color : "";
 
-  useEffect(() => {
-    if (auth.currentUser === null) {
-      navigate("/");
-    }
-  });
+  if (user === null) { navigate("/"); }
   /**
    * @description función que manda userName y color a la base de datos
    */
