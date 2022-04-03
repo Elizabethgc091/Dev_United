@@ -7,19 +7,17 @@ import { UserContext } from "../../../user/UserProvider";
 import "./home.css";
 
 
-import { loginWithGoogle, logout } from "../../../firebaseService/firebase"
+import { loginWithGoogle } from "../../../firebaseService/firebase"
 
 
 /** Sources */
 import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
 import textLogo from "../../../sources/icons/textLogo.svg";
-import iconoGoogle from "../../../sources/icons/iconoGoogle.svg";
+import iconoGoogle from "./iconoGoogle.svg";
 
 export default function Home() {
   const navigate = useNavigate();
   const { user } = React.useContext(UserContext)
-
-
 
   return (
     <>
@@ -45,7 +43,7 @@ export default function Home() {
                 <button
                   type="button"
                   id="btn-login"
-                  onClick={user ? logout : loginWithGoogle}
+                  onClick={loginWithGoogle}
                 >
                   Sign in with Google
                 </button>
