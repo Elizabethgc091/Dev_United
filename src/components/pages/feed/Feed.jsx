@@ -52,16 +52,17 @@ export default function Feed() {
   */
   const calculatePercentage = () => (message.length / CHAR_LIMIT) * 100;
 
-  function userPerfil() {
-    console.log("Redirige al perfil del usuario")
 
+  function goToUserProfile() {
+    console.log("Redirige al perfil del usuario")
+    navigate("/profile")
   }
 
   return (
     <>
       <div className="header-container">
         <div className="nav-container">
-          <img id="photoURL" src={user.photoURL} alt="foto-perfil" onClick={userPerfil} />
+          <img id="photoURL" src={user.photoURL} alt="foto-perfil" onClick={goToUserProfile} />
           <img id="logo-feed" src={logoDevUnited}></img>
           <img id="text-logo-feed" src={textLogo} alt="" />
         </div>
