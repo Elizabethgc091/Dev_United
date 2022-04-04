@@ -5,10 +5,11 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const saveUserData = async (userName, color) => {
   const uid = auth.currentUser.uid;
-  const userData = await setDoc(doc(db, "users", uid), {
+  await setDoc(doc(db, "users", uid), {
     color: color,
     userName: userName,
     photoURL: auth.currentUser.photoURL,
+    favorites: [],
   });
 };
 

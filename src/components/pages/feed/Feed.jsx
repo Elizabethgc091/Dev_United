@@ -5,11 +5,14 @@ import { useNavigate } from "react-router-dom";
 /** components */
 import TweetCard from "./TweetCard";
 
+
 /** Firebase */
-import { auth, db } from "../../../firebaseService/firebase";
+import { auth, db, } from "../../../firebaseService/firebase";
+
 
 /** funcionalities */
-import { addTweet, deleteTweet } from "../../../functionalities/funcionalities";
+//import { addTweet, deleteTweet } from "../../../functionalities/funcionalities";
+import { getTweets, addTweet, deleteTweet } from "../../../functionalities/funcionalities"
 
 /** Style */
 import "./feed.css";
@@ -17,6 +20,7 @@ import "./feed.css";
 /** Sources */
 import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
 import textLogo from "../../../sources/icons/textLogo.svg";
+
 
 export default function Feed() {
   const { user } = React.useContext(UserContext);
@@ -32,7 +36,15 @@ export default function Feed() {
   }, [user])
 
 
+  useEffect(() => {
+    getTweets(setTimeLine)
+  }, [])
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    addTweet(message);
+    setMessage("");
+  }
   /*   useEffect(() => {
       const desuscribir = db.collection("tweets")
         .orderBy("created_at", "desc")
@@ -72,16 +84,6 @@ export default function Feed() {
       setMessage(value);
     }
   }
-  /**
-   * @description función que agrega tweets a firestore
-   * */
-  function handleSubmit(event) {
-    event.preventDefault();
-    addTweet({
-      content: message,
-    });
-    setMessage("");
-  }
 
   /** 
    * @description funcion que calcula el porcentaje del tamaño del tweet
@@ -93,21 +95,21 @@ export default function Feed() {
 
   }
 
-  function likeTweet(id, likesCount) {
-    console.log(userData.favorites);
-    // si ya le dio like, se hace una operacion de dislike (tweet -  1,  usuario elimina de lista de favs)
-    if (userData.favorites.includes(id)) {
-
-      console.log("diste dislike")
-      db.collection("tweets").doc(id).update({ likesCount: likesCount - 1 })
-      db.collection("users").doc(auth.currentUser.uid).update({ favorites: [] })
-    } else {
-      console.log("Diste un like");
-      db.collection("tweets").doc(id).update({ likesCount: likesCount + 1 })
-      db.collection("users").doc(auth.currentUser.uid).update({ favorites: [id] })
-    }
-
-  }
+  /*  function likeTweet(id, likesCount) {
+     console.log(userData.favorites);
+     // si ya le dio like, se hace una operacion de dislike (tweet -  1,  usuario elimina de lista de favs)
+     if (userData.favorites.includes(id)) {
+ 
+       console.log("diste dislike")
+       db.collection("tweets").doc(id).update({ likesCount: likesCount - 1 })
+       db.collection("users").doc(auth.currentUser.uid).update({ favorites: [] })
+     } else {
+       console.log("Diste un like");
+       db.collection("tweets").doc(id).update({ likesCount: likesCount + 1 })
+       db.collection("users").doc(auth.currentUser.uid).update({ favorites: [id] })
+     }
+ 
+   } */
 
   return (
     <>
@@ -156,7 +158,7 @@ export default function Feed() {
       <section className="tweets-content">
         <div className="tweets-box">
           {timeLine.map((tweet) => {
-            return <TweetCard tweet={tweet} key={tweet.id} onDeleteTweet={() => deleteTweet(tweet.id)} onLikeTweet={() => likeTweet(tweet.id, tweet.likesCount)} />;
+            return <TweetCard tweet={tweet} key={tweet.id} />;
           })}
         </div>
 
