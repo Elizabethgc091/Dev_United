@@ -24,23 +24,24 @@ export const trySaveUserData = (userName, color, navigateToFeed) => {
 
 /** Operación de Lectura */
 
-const getUserData = async (uid) => {
+export const getUserData = async function (uid, saveUserData) {
   const docRef = doc(db, "users", uid);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     console.log("Document data:", docSnap.data());
-    return docSnap.data();
+    saveUserData(docSnap.data());
   } else {
     // doc.data() will be undefined in this case
     console.log("No such document!");
-    return null;
+    saveUserData(null);
   }
 };
 
-export const tryGetUserData = (uid) => {
+/* export const tryGetUserData = (uid) => {
   try {
     return getUserData(uid);
   } catch (error) {
     return null;
   }
 };
+ */

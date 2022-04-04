@@ -24,9 +24,9 @@ export default function Feed() {
 
 
   const CHAR_LIMIT = 200;
-
+  console.log(user);
   useEffect(() => {
-    if (user === null) { navigate("/"); }
+    if (user.uid === null) { navigate("/"); }
     getTweets(setTimeLine)
   }, [user])
 

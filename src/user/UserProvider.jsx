@@ -6,10 +6,10 @@ export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
     const [user, setUser] = useState({
+        uid: null,
         photoURL:
             "https://icon-library.com/images/unknown-person-icon/unknown-person-icon-4.jpg",
-        userName: "Cargando...",
-        color: "#FFFFFF",
+
     });
 
     useEffect(() => {

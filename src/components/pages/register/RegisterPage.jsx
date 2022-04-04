@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../user/UserProvider";
-import { tryGetUserData, trySaveUserData } from "../../../user/UserDataSession"
+import { getUserData, trySaveUserData } from "../../../user/UserDataSession"
 
 /** components */
 import ColorPalete from "./ColorPalete";
@@ -19,20 +19,22 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [color, setColor] = useState("");
+  const [userData, setUserData] = useState(null)
   const estiloBase = "user-name-color";
   let estiloDinamico = color ? color : "";
 
   useEffect(() => {
-    if (user === null) { navigate("/"); }
+    if (user.uid === null) { navigate("/"); }
     else {
-      //const userData = tryGetUserData(user.uid);
-      /* if (userData !== null) {
+      getUserData(user.uid, setUserData);
+      console.log(userData);
+      if (userData !== null) {
         console.log("Diferente de null");
         console.log(userData);
         navigate("/feed")
-      } */
+      }
     }
-  }, [user])
+  }, [user, userData])
 
 
   return (

@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (user !== null) {
+    if (user.uid !== null) {
       navigate("/register")
     }
   }, [user])
