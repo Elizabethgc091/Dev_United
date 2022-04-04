@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { UserContext } from "../../../user/UserProvider";
+import { useNavigate } from "react-router-dom";
 
 /** components */
 import TweetCard from "./TweetCard";
@@ -17,6 +19,8 @@ import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
 import textLogo from "../../../sources/icons/textLogo.svg";
 
 export default function Feed() {
+  const { user } = React.useContext(UserContext);
+  const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [timeLine, setTimeLine] = useState([]);
   const [authUser, setAuthUser] = useState({});
@@ -24,33 +28,39 @@ export default function Feed() {
   const CHAR_LIMIT = 200;
 
   useEffect(() => {
-    const desuscribir = db.collection("tweets")
-      .orderBy("created_at", "desc")
-      .onSnapshot((querySnapshot) => {
-        const tweets = [];
-        querySnapshot.forEach((doc) => {
-          const id = doc.id;
-          const temp = {
-            id,
-            ...doc.data(),
-          };
-          tweets.push(temp);
+    if (user === null) { navigate("/"); }
+  }, [user])
+
+
+
+  /*   useEffect(() => {
+      const desuscribir = db.collection("tweets")
+        .orderBy("created_at", "desc")
+        .onSnapshot((querySnapshot) => {
+          const tweets = [];
+          querySnapshot.forEach((doc) => {
+            const id = doc.id;
+            const temp = {
+              id,
+              ...doc.data(),
+            };
+            tweets.push(temp);
+          });
+          setTimeLine(tweets);
         });
-        setTimeLine(tweets);
+  
+      auth.onAuthStateChanged((user) => {
+        setAuthUser(user);
+  
+        db.collection("users").doc(user.uid).get().then((response) => {
+          setUserData(response.data())
+        })
       });
-
-    auth.onAuthStateChanged((user) => {
-      setAuthUser(user);
-
-      db.collection("users").doc(user.uid).get().then((response) => {
-        setUserData(response.data())
-      })
-    });
-    return () => {
-      desuscribir();
-    }
-  }, []);
-  console.log("usuario autentivado");
+      return () => {
+        desuscribir();
+      }
+    }, []);
+    console.log("usuario autentivado"); */
 
   /**
    * @description función que guarda un tweet

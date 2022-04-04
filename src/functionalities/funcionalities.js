@@ -1,4 +1,4 @@
-import firebase from "firebase";
+/* import firebase from "firebase";
 import { db } from "../firebaseService/firebase";
 
 //Metodo para agregar tweets
@@ -22,4 +22,4 @@ export function deleteTweet(id) {
     .catch((error) => {
       console.error("Error removing document: ", error);
     });
-}
+} */

@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../user/UserProvider";
-
-/** Firebase */
-import { auth, db } from "../../../firebaseService/firebase";
+import { tryGetUserData, trySaveUserData } from "../../../user/UserDataSession"
 
 /** components */
 import ColorPalete from "./ColorPalete";
@@ -24,26 +22,19 @@ export default function RegisterPage() {
   const estiloBase = "user-name-color";
   let estiloDinamico = color ? color : "";
 
-  if (user === null) { navigate("/"); }
-  /**
-   * @description función que manda userName y color a la base de datos
-   */
-  function sendRegister() {
-    const uid = auth.currentUser.uid;
-    const selectedColor = color;
-    db.collection("users")
-      .doc(uid)
-      .set({
-        color: selectedColor,
-        userName: userName,
-        photoURL: auth.currentUser.photoURL,
-      })
-      .then(
-        //Si fue exito manda a la siguiente pagina
+  useEffect(() => {
+    if (user === null) { navigate("/"); }
+    else {
+      //const userData = tryGetUserData(user.uid);
+      /* if (userData !== null) {
+        console.log("Diferente de null");
+        console.log(userData);
         navigate("/feed")
-      )
-      .catch((error) => console.log("Error writing document: ", error));
-  }
+      } */
+    }
+  }, [user])
+
+
   return (
     <>
       <div className="register-page">
@@ -75,7 +66,7 @@ export default function RegisterPage() {
               <button
                 id="btn-continue"
                 type="button"
-                onClick={sendRegister}
+                onClick={() => trySaveUserData(userName, color, () => { navigate("/feed") })}
                 disabled={userName === "" || color === ""}
               >
                 continue
