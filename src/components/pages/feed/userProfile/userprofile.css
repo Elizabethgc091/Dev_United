@@ -1,0 +1,70 @@
+* {
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: slkscr font;
+  src: url("../../../../sources//fonts/silkscreen/slkscr.ttf");
+}
+
+.header-profile-user {
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-profile-user {
+  background-color: bisque;
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  font-family: slkscr font;
+  color: #fff;
+  font-size: 20px;
+}
+.info-perfil {
+  background-color: beige;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: slkscr font;
+}
+#photo-perfil-user {
+  height: 134px;
+  border-radius: 50%;
+  border: 2px solid rgb(164, 65, 81);
+}
+
+#userName-perfil {
+  background-color: aquamarine;
+
+  font-size: 28px;
+}
+#email-perfil {
+  background-color: chartreuse;
+  font-size: 20px;
+  padding: 8px;
+  font-family: "fira Code";
+  color: #800fff;
+}
+
+.container-tweets {
+  background-color: brown;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+#post,
+#favorites {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  font-size: 24px;
+}
+.post-container {
+  background-color: #800fff;
+}

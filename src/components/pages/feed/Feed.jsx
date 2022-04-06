@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import TweetCard from "./TweetCard";
 
 /** funcionalities */
-import { getTweets, addTweet, deleteTweet } from "../../../functionalities/funcionalities"
+import { getTweets, addTweet } from "../../../functionalities/funcionalities"
 
 /** Style */
 import "./feed.css";
@@ -41,7 +41,7 @@ export default function Feed() {
    */
   function handleChange(event) {
     const { value } = event.target;
-    console.log(value.length);
+
     if (value.length <= CHAR_LIMIT) {
       setMessage(value);
     }

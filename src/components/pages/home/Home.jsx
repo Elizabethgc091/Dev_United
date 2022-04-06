@@ -6,9 +6,7 @@ import { UserContext } from "../../../user/UserProvider";
 /** Style */
 import "./home.css";
 
-
 import { loginWithGoogle } from "../../../firebaseService/firebase"
-
 
 /** Sources */
 import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
@@ -24,7 +22,7 @@ export default function Home() {
       setUser(result.user)
     })
   }
-
+  /** Si hay un usuario logeado  */
   useEffect(() => {
     if (user.uid !== null) {
       navigate("/register")
@@ -44,7 +42,7 @@ export default function Home() {
           <div className="container-login">
             <div className="container-welcome">
               <span>Welcome</span> <br />
-              <span>to red social ✌🏽</span>
+              <span>to red social 👩🏻‍💻</span>
             </div>
             <div className="description-text">
               Is a social network dedicated to programmers, to communicate

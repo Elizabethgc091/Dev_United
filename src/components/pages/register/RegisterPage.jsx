@@ -23,11 +23,14 @@ export default function RegisterPage() {
   const estiloBase = "user-name-color";
   let estiloDinamico = color ? color : "";
 
+
+  /** si no hay un usuario logeado */
   useEffect(() => {
     if (user.uid === null) { navigate("/"); }
     else {
       getUserData(user.uid, setUserData);
       console.log(userData);
+      /** Si el usuario logeado */
       if (userData !== null) {
         console.log("Diferente de null");
         console.log(userData);
