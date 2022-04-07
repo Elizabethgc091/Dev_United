@@ -113,3 +113,20 @@ export const getUserTweets = async function (setTimeLine, uid) {
     setTimeLine(tweets);
   });
 };
+
+/** Obetener favoritos */
+
+export const getFavoritesTweet = async function (uid, setTimeLine) {
+  const tweets = [];
+  const user = doc(db, "users", uid);
+  const docSnap = await getDoc(user);
+  if (docSnap.exists()) {
+    const favorites = docSnap.data().favorites;
+    for (const favoriteTweetId of favorites) {
+      const tweet = doc(db, "tweets", favoriteTweetId);
+      const tweetSnap = await getDoc(tweet);
+      tweets.push(tweetSnap.data());
+    }
+  }
+  setTimeLine(tweets);
+};

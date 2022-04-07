@@ -10,12 +10,13 @@ import TweetCard from '../TweetCard';
 
 /** Components */
 
-import { getUserTweets } from "../../../../functionalities/funcionalities"
+import { getUserTweets, getFavoritesTweet } from "../../../../functionalities/funcionalities"
 export default function UserProfile() {
 
     const { user, setUser } = React.useContext(UserContext)
     const navigate = useNavigate();
     const [myTweets, setMyTweets] = useState([])
+    const [favoritesTweet, setFavoritesTweet] = useState([])
     const [post, setPost] = useState(false)
     const [favorites, setFavorites] = useState(false)
 
@@ -45,7 +46,11 @@ export default function UserProfile() {
     /** Consulta a firebase */
     useEffect(() => {
         getUserTweets(setMyTweets, user.uid)
-    }, [myTweets, user])
+        getFavoritesTweet(user.uid, setFavoritesTweet)
+
+    }, [myTweets, user, favoritesTweet])
+
+
 
     return (
 
@@ -71,7 +76,7 @@ export default function UserProfile() {
             <section className='seccion-tweets'>
 
                 {post ? myTweets.map((tweet) => { return <TweetCard tweet={tweet} key={tweet.id} />; }) : ""}
-                {favorites ? <p>favorites</p> : ""}
+                {favorites ? favoritesTweet.map((tweet) => { return <TweetCard tweet={tweet} key={tweet.id} />; }) : ""}
             </section>
 
         </>
