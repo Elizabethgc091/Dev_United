@@ -10,6 +10,7 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
+  where,
 } from "firebase/firestore";
 
 import { db, auth } from "../firebaseService/firebase";
@@ -77,6 +78,28 @@ export const addTweet = async function (content) {
 
 export const getTweets = async function (setTimeLine) {
   const q = query(collection(db, "tweets"), orderBy("created_at", "desc"));
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const tweets = [];
+    querySnapshot.forEach((doc) => {
+      const id = doc.id;
+      const temp = {
+        id,
+        ...doc.data(),
+      };
+      tweets.push(temp);
+    });
+    setTimeLine(tweets);
+  });
+};
+
+/** Obtener tweets de usuario logeado */
+export const getUserTweets = async function (setTimeLine, uid) {
+  const userRef = doc(db, "users", uid);
+  const q = query(
+    collection(db, "tweets"),
+    orderBy("created_at", "desc"),
+    where("user", "==", userRef)
+  );
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const tweets = [];
     querySnapshot.forEach((doc) => {

@@ -6,65 +6,83 @@
   src: url("../../../../sources//fonts/silkscreen/slkscr.ttf");
 }
 
-.header-profile-user {
-  background-color: aquamarine;
+.header-userProfile,
+.info-userPerfil,
+.seccion-tweets {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
-.nav-profile-user {
-  background-color: bisque;
+.nav-container-userProfile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  color: #fff;
+  font-size: 20px;
+  font-family: slkscr font;
+  margin: 8px;
+}
+.btn-logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f50d5a;
+  font-size: 16px;
+  border: none;
+  width: 116px;
+  font-family: slkscr font;
+}
+#logout-icon {
+  margin-left: 10px;
+}
+
+.info-userPerfil {
+  background-color: #150714;
+}
+
+#photo-perfil-profile {
+  height: 134px;
+  border-radius: 50%;
+  border: 3px solid yellow;
+  margin-top: 18px;
+}
+#userName-profile {
+  font-family: slkscr font;
+  font-size: 30px;
+  background-color: yellow;
+}
+#email-profile {
+  font-size: 24px;
+  font-family: "Fira Code";
+  color: #fff;
+  margin-top: -16px;
+}
+
+.post-container {
   display: flex;
   justify-content: space-between;
   width: 50%;
+  color: #60265b;
   font-family: slkscr font;
-  color: #fff;
-  font-size: 20px;
-}
-.info-perfil {
-  background-color: beige;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: slkscr font;
-}
-#photo-perfil-user {
-  height: 134px;
-  border-radius: 50%;
-  border: 2px solid rgb(164, 65, 81);
-}
-
-#userName-perfil {
-  background-color: aquamarine;
-
-  font-size: 28px;
-}
-#email-perfil {
-  background-color: chartreuse;
-  font-size: 20px;
-  padding: 8px;
-  font-family: "fira Code";
-  color: #800fff;
-}
-
-.container-tweets {
-  background-color: brown;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  margin-top: 20px;
-}
-#post,
-#favorites {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
   font-size: 24px;
 }
-.post-container {
-  background-color: #800fff;
+
+#posttweet-container,
+#favoritestweet-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+#posttweet-container:hover,
+#favoritestweet-container:hover {
+  background-color: #60265b;
+  color: #000;
+  cursor: pointer;
+}
+.seccion-tweets {
+  background-color: aquamarine;
 }
