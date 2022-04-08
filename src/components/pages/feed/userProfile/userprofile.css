@@ -24,6 +24,15 @@
   font-family: slkscr font;
   margin: 8px;
 }
+.userName-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#back {
+  margin-right: 10px;
+  height: 18px;
+}
 .btn-logout {
   display: flex;
   justify-content: center;

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 /** Style */
 import "./userprofile.css"
 import logout from "./logout.svg"
+import back from "./back.svg"
 import { UserContext } from "../../../../user/UserProvider";
 import { auth } from "../../../../firebaseService/firebase"
 import { signOut } from 'firebase/auth';
@@ -19,7 +20,6 @@ export default function UserProfile() {
     const [favoritesTweet, setFavoritesTweet] = useState([])
     const [post, setPost] = useState(false)
     const [favorites, setFavorites] = useState(false)
-
 
     function logoutSession() {
         signOut(auth).then(() => {
@@ -50,14 +50,16 @@ export default function UserProfile() {
 
     }, [myTweets, user, favoritesTweet])
 
-
-
     return (
 
         <>
             <div className="header-userProfile">
                 <div className="nav-container-userProfile">
-                    <span>{`< ${user.displayName}`}</span>
+                    <div className='userName-container'>
+                        <img id="back" src={back} alt="<" onClick={() => navigate("/feed")} />
+                        <span>{user.displayName}</span>
+                    </div>
+
                     <button type='button' className='btn-logout' onClick={logoutSession}>
                         <p>logout</p>
                         <img id="logout-icon" src={logout} alt="logout" />
@@ -76,9 +78,8 @@ export default function UserProfile() {
             <section className='seccion-tweets'>
 
                 {post ? myTweets.map((tweet) => { return <TweetCard tweet={tweet} key={tweet.id} />; }) : ""}
-                {favorites ? favoritesTweet.map((tweet) => { return <TweetCard tweet={tweet} key={tweet.id} />; }) : ""}
+                {favorites ? favoritesTweet.map((tweet) => { return <TweetCard tweet={tweet} key={tweet.id} /> }) : ""}
             </section>
-
         </>
     )
 }
