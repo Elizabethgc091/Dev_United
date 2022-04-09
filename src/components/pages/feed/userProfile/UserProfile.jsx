@@ -9,6 +9,7 @@ import back from "./back.svg"
 import { auth } from "../../../../firebaseService/firebase"
 import { signOut } from 'firebase/auth';
 import { getUserTweets, getFavoritesTweet } from "../../../../functionalities/funcionalities"
+import { getUserData } from '../../../../user/UserDataSession';
 /**Component */
 import TweetCard from '../TweetCard';
 /**Style */
@@ -21,6 +22,14 @@ export default function UserProfile() {
     const [favoritesTweet, setFavoritesTweet] = useState([])
     const [post, setPost] = useState(true)
     const [favorites, setFavorites] = useState(false)
+    const [userData, setUserData] = useState({
+        color: "red"
+    })
+    const estiloBasebg = "bg-user-data-color";
+    const estiloDinamicobg = userData.color ? userData.color : "";
+    const borderbase = "border-base"
+    const bordeDinamico = userData.color ? userData.color : ""
+
     function logoutSession() {
         signOut(auth).then(() => {
             navigate("/")
@@ -48,8 +57,9 @@ export default function UserProfile() {
         } else if (favorites) {
             await getFavoritesTweet(user.uid, setFavoritesTweet)
         }
-    }, [myTweets, user, favoritesTweet, post, favorites])
+        await getUserData(user.uid, setUserData)
 
+    }, [myTweets, user, favoritesTweet, post, favorites, userData])
 
     return (
 
@@ -58,7 +68,7 @@ export default function UserProfile() {
                 <div className="nav-container-userProfile">
                     <div className='userName-container'>
                         <img id="back" src={back} alt="<" onClick={() => navigate("/feed")} />
-                        <span>{user.displayName}</span>
+                        <span>{userData.userName}</span>
                     </div>
                     <button type='button' className='btn-logout' onClick={logoutSession}>
                         <p>logout</p>
@@ -67,8 +77,8 @@ export default function UserProfile() {
                 </div>
             </div>
             <div className='info-userPerfil'>
-                <img id="photo-perfil-profile" src={user.photoURL} alt="photo perfil" />
-                <p id='userName-profile'>{user.displayName}</p>
+                <img className={borderbase + " " + bordeDinamico} src={user.photoURL} alt="photo perfil" />
+                <p className={estiloBasebg + " " + estiloDinamicobg}>{user.displayName}</p>
                 <p id="email-profile">{user.email}</p>
                 <div className='post-container'>
                     <div id='posttweet-container' onClick={handlerPost}>Post</div>

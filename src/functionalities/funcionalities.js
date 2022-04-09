@@ -96,7 +96,6 @@ const removeFromFavorites = async function (tweetId) {
 export const onLikeTweetUseCase = async function (tweet) {
   const currentUserRef = doc(db, "users", auth.currentUser.uid);
   const currentUser = await (await getDoc(currentUserRef)).data();
-  console.log(currentUser);
   if (currentUser.favorites.includes(tweet.id)) {
     dislikeTweet(tweet.id, tweet.likesCount);
     removeFromFavorites(tweet.id);
