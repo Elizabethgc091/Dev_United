@@ -45,14 +45,3 @@
   font-family: "Fira Code";
   font-size: 18px;
 }
-/* Media Query for mobile*/
-@media only screen and (max-width: 768px) {
-  #color-favorite {
-    font-size: 18px;
-  }
-  .color-margin {
-    height: 43px;
-    width: 43px;
-    margin: 4px;
-  }
-}

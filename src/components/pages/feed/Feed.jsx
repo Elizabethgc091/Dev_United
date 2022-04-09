@@ -15,14 +15,11 @@ import "./feed.css";
 import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
 import textLogo from "../../../sources/icons/textLogo.svg";
 
-
 export default function Feed() {
   const { user } = React.useContext(UserContext);
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [timeLine, setTimeLine] = useState([]);
-
-
   const CHAR_LIMIT = 200;
 
   useEffect(() => {
@@ -41,20 +38,17 @@ export default function Feed() {
    */
   function handleChange(event) {
     const { value } = event.target;
-
     if (value.length <= CHAR_LIMIT) {
       setMessage(value);
     }
   }
 
   /** 
-   * @description funcion que calcula el porcentaje del tamaño del tweet
+   * @description función que calcula el porcentaje del tamaño del tweet
   */
   const calculatePercentage = () => (message.length / CHAR_LIMIT) * 100;
 
-
   function goToUserProfile() {
-    console.log("Redirige al perfil del usuario")
     navigate("/profile")
   }
 
@@ -100,7 +94,6 @@ export default function Feed() {
             </div>
           </div>
         </div>
-
       </div>
       <section className="tweets-content">
         <div className="tweets-box">
@@ -108,7 +101,6 @@ export default function Feed() {
             return <TweetCard tweet={tweet} key={tweet.id} />;
           })}
         </div>
-
       </section>
     </>
   );

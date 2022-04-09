@@ -30,17 +30,6 @@ export const getUserData = async function (uid, saveUserData) {
   if (docSnap.exists()) {
     saveUserData(docSnap.data());
   } else {
-    // doc.data() will be undefined in this case
-
     saveUserData(null);
   }
 };
-
-/* export const tryGetUserData = (uid) => {
-  try {
-    return getUserData(uid);
-  } catch (error) {
-    return null;
-  }
-};
- */

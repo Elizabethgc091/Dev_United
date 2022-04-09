@@ -6,21 +6,17 @@ export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
     const [user, setUser] = useState({
-        uid: null,
+        uid: "",
         photoURL:
             "https://icon-library.com/images/unknown-person-icon/unknown-person-icon-4.jpg",
-
     });
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+    useEffect(async () => {
+        await onAuthStateChanged(auth, (user) => {
             if (user) {
-
                 setUser(user);
             }
         });
-
-    }, [user])
+    }, [onAuthStateChanged, auth])
 
     return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
 }

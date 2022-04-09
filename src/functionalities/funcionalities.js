@@ -15,10 +15,20 @@ import {
 
 import { db, auth } from "../firebaseService/firebase";
 
+/**
+ * @description Función que borra un tweet
+ * @param {*} id
+ */
+
 export const deleteTweet = async function (id) {
   await deleteDoc(doc(db, "tweets", id));
 };
 
+/**
+ * @description Función qu obtiene los datos del usuario del tweet
+ * @param {*} tweet
+ * @param {*} setUser
+ */
 export const getTweetUserData = async function (tweet, setUser) {
   const tweetUser = await getDoc(tweet.user);
   if (tweetUser.exists()) {
@@ -29,12 +39,24 @@ export const getTweetUserData = async function (tweet, setUser) {
   }
 };
 
+/**
+ * @description Función que actualiza el likeCount del tweet a +1
+ * @param {*} id
+ * @param {*} likesCount
+ */
+
 const likeTweet = async function (id, likesCount) {
   const tweet = doc(db, "tweets", id);
   await updateDoc(tweet, {
     likesCount: likesCount + 1,
   });
 };
+
+/**
+ * @description Función que actualiza el likeCount del tweet a -1
+ * @param {*} id
+ * @param {*} likesCount
+ */
 const dislikeTweet = async function (id, likesCount) {
   const tweet = doc(db, "tweets", id);
   await updateDoc(tweet, {
@@ -42,18 +64,35 @@ const dislikeTweet = async function (id, likesCount) {
   });
 };
 
+/**
+ * @description Función que agrega tweets favoritos al user
+ * @param {*} tweetId
+ */
+
 const addToFavorites = async function (tweetId) {
   const user = doc(db, "users", auth.currentUser.uid);
   await updateDoc(user, {
     favorites: arrayUnion(tweetId),
   });
 };
+
+/**
+ * @description Función que elimina tweets favoritos al user
+ * @param {*} tweetId
+ * */
+
 const removeFromFavorites = async function (tweetId) {
   const user = doc(db, "users", auth.currentUser.uid);
   await updateDoc(user, {
     favorites: arrayRemove(tweetId),
   });
 };
+
+/**
+ * @description Casos de uso de like
+ * @param {} tweet
+ */
+
 export const onLikeTweetUseCase = async function (tweet) {
   const currentUserRef = doc(db, "users", auth.currentUser.uid);
   const currentUser = await (await getDoc(currentUserRef)).data();
@@ -67,6 +106,10 @@ export const onLikeTweetUseCase = async function (tweet) {
   }
 };
 
+/**
+ * @description Fucnión que agrega un tweet
+ */
+
 export const addTweet = async function (content) {
   await addDoc(collection(db, "tweets"), {
     content,
@@ -75,6 +118,12 @@ export const addTweet = async function (content) {
     user: doc(db, "users", auth.currentUser.uid),
   });
 };
+
+/**
+ * @description Funciòn que obtiene todos los tweets
+ * @param {*} setTimeLine
+ * @returns
+ */
 
 export const getTweets = async function (setTimeLine) {
   const q = query(collection(db, "tweets"), orderBy("created_at", "desc"));
@@ -95,7 +144,11 @@ export const getTweets = async function (setTimeLine) {
   };
 };
 
-/** Obtener tweets de usuario logeado */
+/**
+ * @description Funcion que obtiene tweets de un usuario logeado
+ * @param {*} setTimeLine
+ * @param {*} uid
+ */
 export const getUserTweets = async function (setTimeLine, uid) {
   const userRef = doc(db, "users", uid);
   const q = query(
@@ -117,7 +170,11 @@ export const getUserTweets = async function (setTimeLine, uid) {
   });
 };
 
-/** Obetener favoritos */
+/**
+ * @description Función que obtiene los tweet favoritos del usuario logeado
+ * @param {*} uid
+ * @param {*} setTimeLine
+ */
 
 export const getFavoritesTweet = async function (uid, setTimeLine) {
   const tweets = [];
@@ -127,8 +184,13 @@ export const getFavoritesTweet = async function (uid, setTimeLine) {
     const favorites = docSnap.data().favorites;
     for (const favoriteTweetId of favorites) {
       const tweet = doc(db, "tweets", favoriteTweetId);
+      const id = tweet.id;
       const tweetSnap = await getDoc(tweet);
-      tweets.push(tweetSnap.data());
+      const temp = {
+        id,
+        ...tweetSnap.data(),
+      };
+      tweets.push(temp);
     }
   }
   setTimeLine(tweets);

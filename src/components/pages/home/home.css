@@ -77,39 +77,3 @@
 #beta {
   color: rgb(239, 0, 72);
 }
-/* Media Query for mobile*/
-@media only screen and (min-width: 280px) and (max-width: 1024px) {
-  .home-page {
-    flex-direction: column;
-    justify-content: space-around;
-  }
-
-  #logo-dev-united {
-    height: 120px;
-    margin-bottom: 20px;
-  }
-  #text-logo {
-    height: 30px;
-  }
-  .container-login {
-    margin-top: 0px;
-  }
-
-  .container-welcome {
-    font-size: 34px;
-    font-weight: 600;
-    margin-bottom: 28px;
-  }
-  .description-text {
-    font-size: 18px;
-    margin-bottom: 28px;
-  }
-
-  #btn-login {
-    font-size: 18px;
-  }
-  .footer {
-    font-size: 14px;
-    margin: 30px;
-  }
-}

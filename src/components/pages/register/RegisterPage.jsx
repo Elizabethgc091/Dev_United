@@ -1,18 +1,19 @@
 /** Dependencies */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../../user/UserProvider";
-import { getUserData, trySaveUserData } from "../../../user/UserDataSession"
+/** Context */
+import { UserContext } from "../../../user/UserProvider"
 
 /** components */
 import ColorPalete from "./ColorPalete";
 
-/**Style */
-import "./registerPage.css";
-
 /** sources */
 import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
 import textLogo from "../../../sources/icons/textLogo.svg";
+import { getUserData, trySaveUserData } from "../../../user/UserDataSession"
+
+/**Style */
+import "./registerPage.css";
 
 export default function RegisterPage() {
   const { user } = React.useContext(UserContext)
@@ -21,14 +22,13 @@ export default function RegisterPage() {
   const [color, setColor] = useState("");
   const [userData, setUserData] = useState(null)
   const estiloBase = "user-name-color";
-  let estiloDinamico = color ? color : "";
-
+  const estiloDinamico = color ? color : "";
 
   /** si no hay un usuario logeado */
-  useEffect(() => {
+  useEffect(async () => {
     if (user.uid === null) { navigate("/"); }
     else {
-      getUserData(user.uid, setUserData);
+      await getUserData(user.uid, setUserData);
 
       /** Si el usuario logeado */
       if (userData !== null) {
@@ -36,7 +36,6 @@ export default function RegisterPage() {
       }
     }
   }, [user, userData])
-
 
   return (
     <>

@@ -1,28 +1,30 @@
 /** Dependencies */
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+/** Context */
 import { UserContext } from "../../../user/UserProvider";
-
 /** Style */
 import "./home.css";
-
-import { loginWithGoogle } from "../../../firebaseService/firebase"
-
 /** Sources */
 import logoDevUnited from "../../../sources/icons/logoDevUnited.svg";
 import textLogo from "../../../sources/icons/textLogo.svg";
 import iconoGoogle from "./iconoGoogle.svg";
+import { loginWithGoogle } from "../../../firebaseService/firebase"
 
 export default function Home() {
   const navigate = useNavigate();
   const { user, setUser } = React.useContext(UserContext)
 
+  /**
+   * @description Función que hace el Login de un usuario
+   */
   function loginUserWithGoogle() {
     loginWithGoogle().then((result) => {
       setUser(result.user)
     })
   }
-  /** Si hay un usuario logeado  */
+
+
   useEffect(() => {
     if (user.uid !== null) {
       navigate("/register")
