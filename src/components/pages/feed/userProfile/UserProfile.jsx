@@ -34,13 +34,11 @@ export default function UserProfile() {
     }
 
     function handlerPost() {
-        console.log("Se muestran post mios");
         setPost(true)
         setFavorites(false)
     }
 
     function handlerFavorites() {
-        console.log("Se muestran post favoritos :D");
         setPost(false)
         setFavorites(true)
     }
