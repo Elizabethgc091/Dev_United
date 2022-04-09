@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 
+/** Sweet Alert */
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 import { auth } from "../../../firebaseService/firebase"
 import { getTweetUserData, deleteTweet, onLikeTweetUseCase } from "../../../functionalities/funcionalities"
 
@@ -9,13 +13,16 @@ import "./tweetCard.css";
 import heartLike from "../../../sources/icons/heartLike.svg";
 import garbage from "../../../sources/icons/garbage.svg";
 
+
 export default function TweetCard({ tweet }) {
+  const MySwal = withReactContent(Swal)
+
   const temporalUser = {
-    photoURL:
-      "https://icon-library.com/images/unknown-person-icon/unknown-person-icon-4.jpg",
+    photoURL: "https://cdn-icons.flaticon.com/png/512/3098/premium/3098832.png?token=exp=1649456735~hmac=1d544d3898c3002ad9c4b989129e0ed2",
     userName: "Cargando...",
     color: "#FFFFFF",
   };
+
 
   const [user, setUser] = useState(temporalUser);
   const estiloBase = "user-color";
@@ -31,6 +38,33 @@ export default function TweetCard({ tweet }) {
     getTweetUserData(tweet, setUser)
   }, [getTweetUserData]);
 
+  function confirmDeleteTweet() {
+
+    Swal.fire({
+      title: 'Delete tweet',
+      text: "Are you sure?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#0096CE',
+      cancelButtonColor: '#F50D5A',
+      confirmButtonText: 'Yes, delete it!',
+      background: "#2E132C",
+      color: "#fff",
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: "success",
+          title: 'Deleted',
+          text: 'Your tweet has been deleted.',
+        }
+
+        )
+        deleteTweet(tweet.id)
+      }
+    })
+
+  }
   return (
     <>
       <div className="section-tweet-container">
@@ -44,11 +78,11 @@ export default function TweetCard({ tweet }) {
                 {user.userName}
               </div>
               <div>
-                <span id="date"> -{tweet.created_at.toDate().toLocaleDateString("es-MX", options)}</span>
+                <span id="date"> {tweet.created_at.toDate().toLocaleDateString("es-MX", options)}</span>
               </div>
 
             </div>
-            {auth.currentUser.uid == user.id ? <img id="garbage-svg" src={garbage} alt="basura" onClick={() => deleteTweet(tweet.id)} /> : ""}
+            {auth.currentUser.uid == user.id ? <img id="garbage-svg" src={garbage} alt="basura" onClick={confirmDeleteTweet} /> : ""}
 
           </div>
           <div className="message-content">

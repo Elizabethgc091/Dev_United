@@ -39,7 +39,8 @@
 }
 #date {
   font-size: 18px;
-  color:#fff
+  color: #fff;
+  margin-left: 16px;
 }
 .user-color-red {
   background-color: #f50d5a;

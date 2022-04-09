@@ -20,7 +20,6 @@ export default function UserProfile() {
     const [favoritesTweet, setFavoritesTweet] = useState([])
     const [post, setPost] = useState(false)
     const [favorites, setFavorites] = useState(false)
-
     function logoutSession() {
         signOut(auth).then(() => {
             navigate("/")
@@ -32,6 +31,7 @@ export default function UserProfile() {
             })
         })
     }
+
     function handlerPost() {
         console.log("Se muestran post mios");
         setPost(true)
@@ -48,7 +48,9 @@ export default function UserProfile() {
         getUserTweets(setMyTweets, user.uid)
         getFavoritesTweet(user.uid, setFavoritesTweet)
 
+
     }, [myTweets, user, favoritesTweet])
+
 
     return (
 
@@ -68,7 +70,7 @@ export default function UserProfile() {
             </div>
             <div className='info-userPerfil'>
                 <img id="photo-perfil-profile" src={user.photoURL} alt="photo perfil" />
-                <p id="userName-profile">{user.displayName}</p>
+                <p id='userName-profile'>{user.displayName}</p>
                 <p id="email-profile">{user.email}</p>
                 <div className='post-container'>
                     <div id='posttweet-container' onClick={handlerPost}>Post</div>
@@ -76,9 +78,10 @@ export default function UserProfile() {
                 </div>
             </div>
             <section className='seccion-tweets'>
+                <div className='seccionTweets-container'> {post ? myTweets.map((tweet) => { return <TweetCard tweet={tweet} key={tweet.id} />; }) : ""}
+                    {favorites ? favoritesTweet.map((tweet) => { return <TweetCard tweet={tweet} key={tweet.id} /> }) : ""}
+                </div>
 
-                {post ? myTweets.map((tweet) => { return <TweetCard tweet={tweet} key={tweet.id} />; }) : ""}
-                {favorites ? favoritesTweet.map((tweet) => { return <TweetCard tweet={tweet} key={tweet.id} /> }) : ""}
             </section>
         </>
     )

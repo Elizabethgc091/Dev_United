@@ -90,6 +90,9 @@ export const getTweets = async function (setTimeLine) {
     });
     setTimeLine(tweets);
   });
+  return () => {
+    unsubscribe();
+  };
 };
 
 /** Obtener tweets de usuario logeado */

@@ -15,7 +15,7 @@ export default function UserProvider({ children }) {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log(user);
+
                 setUser(user);
             }
         });

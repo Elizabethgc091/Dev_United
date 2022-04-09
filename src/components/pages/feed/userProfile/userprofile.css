@@ -93,5 +93,11 @@
   cursor: pointer;
 }
 .seccion-tweets {
-  background-color: aquamarine;
+  margin-top: 20px;
+}
+
+.seccionTweets-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }

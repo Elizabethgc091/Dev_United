@@ -29,11 +29,9 @@ export default function RegisterPage() {
     if (user.uid === null) { navigate("/"); }
     else {
       getUserData(user.uid, setUserData);
-      console.log(userData);
+
       /** Si el usuario logeado */
       if (userData !== null) {
-        console.log("Diferente de null");
-        console.log(userData);
         navigate("/feed")
       }
     }
