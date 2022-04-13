@@ -43,10 +43,10 @@ export default function Home() {
           <div className="container-login">
             <div className="container-welcome">
               <span>Welcome</span> <br />
-              <span>to red social 👩🏻‍💻</span>
+              <span>connected people 🤝</span>
             </div>
             <div className="description-text">
-              Is a social network dedicated to programmers, to communicate
+              a social network dedicated to programmers
             </div>
             <div className="btn-signIn">
               <img id="icon-google" src={iconoGoogle} alt="" />

@@ -106,7 +106,7 @@ export const onLikeTweetUseCase = async function (tweet) {
 };
 
 /**
- * @description Fucnión que agrega un tweet
+ * @description Función que agrega un tweet
  */
 
 export const addTweet = async function (content) {

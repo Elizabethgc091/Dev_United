@@ -18,12 +18,11 @@ export default function TweetCard({ tweet }) {
     color: "#FFFFFF",
   };
 
-
   const [user, setUser] = useState(temporalUser);
   const estiloBase = "user-color";
   let estiloDinamico = user.color ? user.color : "red";
 
-  var options = {
+  const options = {
     year: "numeric",
     month: "numeric",
     day: "numeric",
