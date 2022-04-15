@@ -13,7 +13,7 @@ import { getTweetUserData, deleteTweet, onLikeTweetUseCase } from "../../../func
 
 export default function TweetCard({ tweet }) {
   const temporalUser = {
-    photoURL: "https://cdn-icons.flaticon.com/png/512/3098/premium/3098832.png?token=exp=1649456735~hmac=1d544d3898c3002ad9c4b989129e0ed2",
+    photoURL: "https://bioris.cisanmartin.com/intSanMartin/img/person.png",
     userName: "Cargando...",
     color: "#FFFFFF",
   };
